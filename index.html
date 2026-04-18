@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SECURITY WITH NIKHIL</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: #00ff00;
+            font-family: monospace;
+            overflow: hidden;
+        }
+
+        /* Terminal */
+        #terminal {
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Text animation */
+        .line {
+            animation: fade 0.2s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Red alert */
+        #alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            display: none;
+            animation: flash 0.5s infinite;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Camera */
+        #cam {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 200px;
+            border: 2px solid red;
+            display: none;
+        }
+
+        /* Glitch effect */
+        .glitch {
+            animation: glitch 0.2s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(1px, 1px);
+            }
+
+            50% {
+                transform: translate(-1px, -1px);
+            }
+
+            100% {
+                transform: translate(1px, -1px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="terminal"></div>
+    <div id="alert">⚠ SYSTEM BREACH DETECTED ⚠</div>
+    <video id="cam" autoplay></video>
+
+    <script>
+        const terminal = document.getElementById("terminal");
+        const alertBox = document.getElementById("alert");
+        const cam = document.getElementById("cam");
+
+        // 👇 NAME CHANGE KARO
+        const target = "AVI KUMAR VERMA";
+
+        const lines = [
+            "[+] Initializing Hack Tool...",
+            "[+] Target: " + target,
+            "[+] Fetching IP address...",
+            "[+] IP FOUND: 192.168." + Math.floor(Math.random() * 255) + "." + Math.floor(Math.random() * 255),
+            "[+] Location traced: Delhi, India",
+            "[+] Bypassing firewall...",
+            "[+] Injecting malware...",
+            "[!] Accessing personal files...",
+            "[+] Passwords cracked...",
+            "[✓] FULL ACCESS GRANTED"
+        ];
+
+        let i = 0;
+
+        function speak(text) {
+            let msg = new SpeechSynthesisUtterance(text);
+            msg.pitch = 0.3;
+            msg.rate = 0.8;
+            speechSynthesis.speak(msg);
+        }
+
+        function addLine(text) {
+            let div = document.createElement("div");
+            div.className = "line";
+            div.textContent = text;
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function startHack() {
+            if (i < lines.length) {
+                addLine(lines[i]);
+                speak(lines[i]);
+                i++;
+                setTimeout(startHack, 900);
+            } else {
+                finalPhase();
+            }
+        }
+
+        function finalPhase() {
+
+            addLine(">>> SYSTEM COMPROMISED <<<");
+
+            // Screen shake
+            document.body.classList.add("glitch");
+
+            // Red alert
+            setTimeout(() => {
+                alertBox.style.display = "flex";
+            }, 2000);
+
+            // Camera access
+            setTimeout(() => {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        cam.srcObject = stream;
+                        cam.style.display = "block";
+                    });
+            }, 3000);
+
+            // Countdown
+            let count = 15;
+            let timer = setInterval(() => {
+                addLine("Deleting system files in: " + count);
+                count--;
+                if (count < 0) {
+                    clearInterval(timer);
+                    addLine("💀 ALL FILES DELETED 💀");
+                    speak("All files deleted");
+                }
+            }, 1000);
+        }
+
+        startHack();
+
+        // Random data spam
+        setInterval(() => {
+            addLine("0x" + Math.random().toString(16).substring(2, 8));
+        }, 300);
+
+    </script>
+
+</body>
+
+</html>
